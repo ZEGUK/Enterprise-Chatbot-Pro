@@ -23,37 +23,9 @@ This demo is based on [azure-search-openai-demo](https://github.com/Azure-Sample
   
 ![image](docs/storageaccount.png)
 
-Also this demo adjusts the UI to the light for better fitting customize scenario.
+Also this demo adjusts the UI to the lightweight for better fitting customize scenario.
 
 ![image](docs/appUI.png)
-
-## Table of Contents
-
-- [Features](#features)
-- [Azure account requirements](#azure-account-requirements)
-- [Azure deployment](#azure-deployment)
-  - [Cost estimation](#cost-estimation)
-  - [Project setup](#project-setup)
-    - [GitHub Codespaces](#github-codespaces)
-    - [VS Code Dev Containers](#vs-code-dev-containers)
-    - [Local environment](#local-environment)
-  - [Deploying from scratch](#deploying-from-scratch)
-  - [Deploying with existing Azure resources](#deploying-with-existing-azure-resources)
-  - [Deploying again](#deploying-again)
-- [Sharing environments](#sharing-environments)
-- [Enabling optional features](#enabling-optional-features)
-  - [Enabling authentication](#enabling-authentication)
-  - [Enabling login and document level access control](#enabling-login-and-document-level-access-control)
-  - [Enabling CORS for an alternate frontend](#enabling-cors-for-an-alternate-frontend)
-- [Using the app](#using-the-app)
-- [Running locally](#running-locally)
-- [Monitoring with Application Insights](#monitoring-with-application-insights)
-- [Customizing the UI and data](#customizing-the-ui-and-data)
-- [Productionizing](#productionizing)
-- [Resources](#resources)
-  - [FAQ](#faq)
-  - [Troubleshooting](#troubleshooting)
-  - [Getting help](#getting-help)
 
 
 This sample demonstrates a few approaches for creating ChatGPT-like experiences over your own data using the Retrieval Augmented Generation pattern. It uses Azure OpenAI Service to access the ChatGPT model (gpt-35-turbo and gpt-4v if needed), and Azure AI Search for data indexing and retrieval.
@@ -78,7 +50,7 @@ The repo includes sample data so it's ready to try end to end.
   * Your Azure account also needs `Microsoft.Resources/deployments/write` permissions on the subscription level.
 
 ## Azure deployment
-### AZURE RESOURCES LIST**
+### AZURE RESOURCES LIST
 ![image](docs/azresource.png)
 
 ### Cost estimation
@@ -95,31 +67,7 @@ However, you can try the [Azure pricing calculator](https://azure.com/e/8ffbe5b1
 
 To reduce costs, you can switch to free SKUs for Azure App Service and Azure AI Document Intelligence by changing the parameters file under the `infra` folder. There are some limits to consider; for example, the free Azure AI Document Intelligence resource only analyzes the first 2 pages of each document. You can also reduce costs associated with the Azure AI Document Intelligence by reducing the number of documents in the `data` folder, or by removing the postprovision hook in `azure.yaml` that runs the `prepdocs.py` script.
 
-⚠️ To avoid unnecessary costs, remember to take down your app if it's no longer in use,
-either by deleting the resource group in the Portal or running `azd down`.
-
 ### Project setup
-
-You have a few options for setting up this project.
-The easiest way to get started is GitHub Codespaces, since it will setup all the tools for you,
-but you can also [set it up locally](#local-environment) if desired.
-
-#### GitHub Codespaces
-
-You can run this repo virtually by using GitHub Codespaces, which will open a web-based VS Code in your browser:
-
-[![Open in GitHub Codespaces](https://img.shields.io/static/v1?style=for-the-badge&label=GitHub+Codespaces&message=Open&color=brightgreen&logo=github)](https://github.com/codespaces/new?hide_repo_select=true&ref=main&repo=599293758&machine=standardLinux32gb&devcontainer_path=.devcontainer%2Fdevcontainer.json&location=WestUs2)
-
-#### VS Code Dev Containers
-
-A related option is VS Code Dev Containers, which will open the project in your local VS Code using the [Dev Containers extension](https://marketplace.visualstudio.com/items?itemName=ms-vscode-remote.remote-containers):
-
-1. Start Docker Desktop (install it if not already installed)
-1. Open the project:
-    [![Open in Dev Containers](https://img.shields.io/static/v1?style=for-the-badge&label=Dev%20Containers&message=Open&color=blue&logo=visualstudiocode)](https://vscode.dev/redirect?url=vscode://ms-vscode-remote.remote-containers/cloneInVolume?url=https://github.com/azure-samples/azure-search-openai-demo)
-1. In the VS Code window that opens, once the project files show up (this may take several minutes), open a terminal window
-1. Run `azd auth login`
-1. Now you can follow the instructions in [Deploying from scratch](#deploying-from-scratch) below
 
 #### Local environment
 
@@ -148,7 +96,7 @@ Execute the following command, if you don't have any pre-existing Azure services
 1. Run `azd up` - This will provision Azure resources and deploy this sample to those resources, including building the search index based on the files found in the `./data` folder.
     * **Important**: Beware that the resources created by this command will incur immediate costs, primarily from the AI Search resource. These resources may accrue costs even if you interrupt the command before it is fully executed. You can run `azd down` or delete the resources manually to avoid unnecessary spending.
     * You will be prompted to select two locations, one for the majority of resources and one for the OpenAI resource, which is currently a short list. That location list is based on the [OpenAI model availability table](https://learn.microsoft.com/azure/cognitive-services/openai/concepts/models#model-summary-table-and-region-availability) and may become outdated as availability changes.
-1. After the application has been successfully deployed you will see a URL printed to the console.  Click that URL to interact with the application in your browser.
+2. After the application has been successfully deployed you will see a URL printed to the console.  Click that URL to interact with the application in your browser.
 It will look like the following:
 
 !['Output from running azd up'](assets/endpoint.png)
@@ -312,135 +260,10 @@ This sample is designed to be a starting point for your own production applicati
 but you should do a thorough review of the security and performance before deploying
 to production. Read through our [productionizing guide](docs/productionizing.md) for more details.
 
-## Resources
-
-* [📖 Revolutionize your Enterprise Data with ChatGPT: Next-gen Apps w/ Azure OpenAI and AI Search](https://aka.ms/entgptsearchblog)
-* [📖 Azure AI Search](https://learn.microsoft.com/azure/search/search-what-is-azure-search)
-* [📖 Azure OpenAI Service](https://learn.microsoft.com/azure/cognitive-services/openai/overview)
-* [📖 Comparing Azure OpenAI and OpenAI](https://learn.microsoft.com/azure/cognitive-services/openai/overview#comparing-azure-openai-and-openai/)
-* [📖 Access Control in Generative AI applications with Azure Cognitive Search](https://techcommunity.microsoft.com/t5/ai-azure-ai-services-blog/access-control-in-generative-ai-applications-with-azure/ba-p/3956408)
-* [📺 Quickly build and deploy OpenAI apps on Azure, infused with your own data](https://www.youtube.com/watch?v=j8i-OM5kwiY)
-
-## Clean up
-
-To clean up all the resources created by this sample:
-
-1. Run `azd down`
-2. When asked if you are sure you want to continue, enter `y`
-3. When asked if you want to permanently delete the resources, enter `y`
-
-The resource group and all the resources will be deleted.
-
-
-### FAQ
-
-<details><a id="compare-samples"></a>
-<summary>How does this sample compare to other Chat with Your Data samples?</summary>
-
-Another popular repository for this use case is here:
-https://github.com/Microsoft/sample-app-aoai-chatGPT/
-
-That repository is designed for use by customers using Azure OpenAI studio and Azure Portal for setup. It also includes `azd` support for folks who want to deploy it completely from scratch.
-
-The primary differences:
-
-* This repository includes multiple RAG (retrieval-augmented generation) approaches that chain the results of multiple API calls (to Azure OpenAI and ACS) together in different ways. The other repository uses only the built-in data sources option for the ChatCompletions API, which uses a RAG approach on the specified ACS index. That should work for most uses, but if you needed more flexibility, this sample may be a better option.
-* This repository is also a bit more experimental in other ways, since it's not tied to the Azure OpenAI Studio like the other repository.
-
-Feature comparison:
-
-| Feature | azure-search-openai-demo | sample-app-aoai-chatGPT |
-| --- | --- | --- |
-| RAG approach | Multiple approaches | Only via ChatCompletion API data_sources |
-| Vector support | ✅ Yes | ✅ Yes |
-| Data ingestion | ✅ Yes (PDF) | ✅ Yes (PDF, TXT, MD, HTML) |
-| Persistent chat history | ❌ No (browser tab only) | ✅ Yes, in CosmosDB |
-
-Technology comparison:
-
-| Tech | azure-search-openai-demo | sample-app-aoai-chatGPT |
-| --- | --- | --- |
-| Frontend | React | React |
-| Backend | Python (Quart) | Python (Flask) |
-| Vector DB | Azure AI Search | Azure AI Search |
-| Deployment | Azure Developer CLI (azd) | Azure Portal, az, azd |
-
-</details>
-
 <details><a id="switch-gpt4"></a>
 <summary>How do you use GPT-4 with this sample?</summary>
 
 In `infra/main.bicep`, change `chatGptModelName` to 'gpt-4' instead of 'gpt-35-turbo'. You may also need to adjust the capacity above that line depending on how much TPM your account is allowed.
-</details>
-
-<details><a id="azd-up-explanation"></a>
-<summary>What does the `azd up` command do?</summary>
-
-The `azd up` command comes from the [Azure Developer CLI](https://learn.microsoft.com/en-us/azure/developer/azure-developer-cli/overview), and takes care of both provisioning the Azure resources and deploying code to the selected Azure hosts.
-
-The `azd up` command uses the `azure.yaml` file combined with the infrastructure-as-code `.bicep` files in the `infra/` folder. The `azure.yaml` file for this project declares several "hooks" for the prepackage step and postprovision steps. The `up` command first runs the `prepackage` hook which installs Node dependencies and builds the React.JS-based JavaScript files. It then packages all the code (both frontend and backend) into a zip file which it will deploy later.
-
-Next, it provisions the resources based on `main.bicep` and `main.parameters.json`. At that point, since there is no default value for the OpenAI resource location, it asks you to pick a location from a short list of available regions. Then it will send requests to Azure to provision all the required resources. With everything provisioned, it runs the `postprovision` hook to process the local data and add it to an Azure AI Search index.
-
-Finally, it looks at `azure.yaml` to determine the Azure host (appservice, in this case) and uploads the zip to Azure App Service. The `azd up` command is now complete, but it may take another 5-10 minutes for the App Service app to be fully available and working, especially for the initial deploy.
-
-Related commands are `azd provision` for just provisioning (if infra files change) and `azd deploy` for just deploying updated app code.
-</details>
-
-<details><a id="appservice-logs"></a>
-<summary>How can we view logs from the App Service app?</summary>
-
-You can view production logs in the Portal using either the Log stream or by downloading the default_docker.log file from Advanced tools.
-
-The following line of code in `app/backend/app.py` configures the logging level:
-
-```python
-logging.basicConfig(level=os.getenv("APP_LOG_LEVEL", default_level))
-```
-
-To change the default level, either change `default_level` or set the `APP_LOG_LEVEL` environment variable
-to one of the [allowed log levels](https://docs.python.org/3/library/logging.html#logging-levels):
-`DEBUG`, `INFO`, `WARNING`, `ERROR`, `CRITICAL`.
-
-If you need to log in a route handler, use the the global variable `current_app`'s logger:
-
-```python
-async def chat():
-    current_app.logger.info("Received /chat request")
-```
-
-Otherwise, use the `logging` module's root logger:
-
-```python
-logging.info("System message: %s", system_message)
-```
-
-If you're having troubles finding the logs in App Service, see this blog post on [tips for debugging App Service app deployments](http://blog.pamelafox.org/2023/06/tips-for-debugging-flask-deployments-to.html) or watch [this video about viewing App Service logs](https://www.youtube.com/watch?v=f0-aYuvws54).
-</details>
-
-### Troubleshooting
-
-Here are the most common failure scenarios and solutions:
-
-1. The subscription (`AZURE_SUBSCRIPTION_ID`) doesn't have access to the Azure OpenAI service. Please ensure `AZURE_SUBSCRIPTION_ID` matches the ID specified in the [OpenAI access request process](https://aka.ms/oai/access).
-
-1. You're attempting to create resources in regions not enabled for Azure OpenAI (e.g. East US 2 instead of East US), or where the model you're trying to use isn't enabled. See [this matrix of model availability](https://aka.ms/oai/models).
-
-1. You've exceeded a quota, most often number of resources per region. See [this article on quotas and limits](https://aka.ms/oai/quotas).
-
-1. You're getting "same resource name not allowed" conflicts. That's likely because you've run the sample multiple times and deleted the resources you've been creating each time, but are forgetting to purge them. Azure keeps resources for 48 hours unless you purge from soft delete. See [this article on purging resources](https://learn.microsoft.com/azure/cognitive-services/manage-resources?tabs=azure-portal#purge-a-deleted-resource).
-
-1. You see `CERTIFICATE_VERIFY_FAILED` when the `prepdocs.py` script runs. That's typically due to incorrect SSL certificates setup on your machine. Try the suggestions in this [StackOverflow answer](https://stackoverflow.com/questions/35569042/ssl-certificate-verify-failed-with-python3/43855394#43855394).
-
-1. After running `azd up` and visiting the website, you see a '404 Not Found' in the browser. Wait 10 minutes and try again, as it might be still starting up. Then try running `azd deploy` and wait again. If you still encounter errors with the deployed app, consult these [tips for debugging App Service app deployments](http://blog.pamelafox.org/2023/06/tips-for-debugging-flask-deployments-to.html) or watch [this video about downloading App Service logs](https://www.youtube.com/watch?v=f0-aYuvws54). Please file an issue if the logs don't help you resolve the error.
-
-### Getting help
-
-This is a sample built to demonstrate the capabilities of modern Generative AI apps and how they can be built in Azure.
-For help with deploying this sample, please post in [GitHub Issues](/issues). If you're a Microsoft employee, you can also post in [our Teams channel](https://aka.ms/azai-python-help).
-
-This repository is supported by the maintainers, _not_ by Microsoft Support,
-so please use the support mechanisms described above, and we will do our best to help you out.
 
 ### Note
 

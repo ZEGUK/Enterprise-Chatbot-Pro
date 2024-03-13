@@ -1,26 +1,31 @@
 ---
-name: ChatGPT + Enterprise data
-description: Chat with your data using OpenAI and AI Search.
+name: Enterprise Chatbot
+description: Chat with your enterprise data using OpenAI and AI Search.
 languages:
 - python
 - typescript
 - bicep
 - azdeveloper
 products:
-- azure-openai
-- azure-cognitive-search
+- azure-openai/openai
+- azure-AI-search
 - azure-app-service
 - azure
-page_type: sample
-urlFragment: azure-search-openai-demo
 ---
 
-# ChatGPT + Enterprise data with Azure OpenAI and AI Search
+# Enterprise Chatbot with AOAI
 
-> [!IMPORTANT]
-> As of November 15, 2023, Azure Cognitive Search has been renamed to Azure AI Search.
+This demo is based on [azure-search-openai-demo](https://github.com/Azure-Samples/azure-search-openai-demo) and extend file upload feature to bring your own data into the chatbot. 
 
-### Announcing [**JavaScript**](https://aka.ms/azai/js/code), [**.NET**](https://aka.ms/azai/net/code), and [**Java**](https://aka.ms/azai/java/code) samples based on this one in [**Python**](https://aka.ms/azai/py/code). Learn more at  https://aka.ms/azai.
+![image](docs/upload.png)
+
+ You can view uploaded files in the Azure storage account-containers-content
+  
+![image](docs/storageaccount.png)
+
+Also this demo adjusts the UI to the light for better fitting customize scenario.
+
+![image](docs/appUI.png)
 
 ## Table of Contents
 
@@ -50,22 +55,13 @@ urlFragment: azure-search-openai-demo
   - [Troubleshooting](#troubleshooting)
   - [Getting help](#getting-help)
 
-[![Open in GitHub Codespaces](https://img.shields.io/static/v1?style=for-the-badge&label=GitHub+Codespaces&message=Open&color=brightgreen&logo=github)](https://github.com/codespaces/new?hide_repo_select=true&ref=main&repo=599293758&machine=standardLinux32gb&devcontainer_path=.devcontainer%2Fdevcontainer.json&location=WestUs2)
-[![Open in Dev Containers](https://img.shields.io/static/v1?style=for-the-badge&label=Dev%20Containers&message=Open&color=blue&logo=visualstudiocode)](https://vscode.dev/redirect?url=vscode://ms-vscode-remote.remote-containers/cloneInVolume?url=https://github.com/azure-samples/azure-search-openai-demo)
 
-This sample demonstrates a few approaches for creating ChatGPT-like experiences over your own data using the Retrieval Augmented Generation pattern. It uses Azure OpenAI Service to access the ChatGPT model (gpt-35-turbo), and Azure AI Search for data indexing and retrieval.
+This sample demonstrates a few approaches for creating ChatGPT-like experiences over your own data using the Retrieval Augmented Generation pattern. It uses Azure OpenAI Service to access the ChatGPT model (gpt-35-turbo and gpt-4v if needed), and Azure AI Search for data indexing and retrieval.
 
-The repo includes sample data so it's ready to try end to end. In this sample application we use a fictitious company called Contoso Electronics, and the experience allows its employees to ask questions about the benefits, internal policies, as well as job descriptions and roles.
+The repo includes sample data so it's ready to try end to end. 
 
-![RAG Architecture](docs/appcomponents.png)
+![RAG Architecture](docs/RAG.png)
 
-## Features
-
-* Chat and Q&A interfaces
-* Explores various options to help users evaluate the trustworthiness of responses with citations, tracking of source content, etc.
-* Shows possible approaches for data preparation, prompt construction, and orchestration of interaction between model (ChatGPT) and retriever (AI Search)
-* Settings directly in the UX to tweak the behavior and experiment with options
-* Performance tracing and monitoring with Application Insights
 
 ![Chat screen](docs/chatscreen.png)
 
@@ -82,6 +78,8 @@ The repo includes sample data so it's ready to try end to end. In this sample ap
   * Your Azure account also needs `Microsoft.Resources/deployments/write` permissions on the subscription level.
 
 ## Azure deployment
+### AZURE RESOURCES LIST**
+![image](docs/azresource.png)
 
 ### Cost estimation
 

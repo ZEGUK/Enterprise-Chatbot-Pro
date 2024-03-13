@@ -1,25 +1,13 @@
----
-name: Enterprise Chatbot
-description: Chat with your enterprise data using OpenAI and AI Search.
-languages:
-- python
-- typescript
-- bicep
-- azdeveloper
-products:
-- azure-openai/openai
-- azure-AI-search
-- azure-app-service
-- azure
----
 
 # Enterprise Chatbot with AOAI
 
 This demo is based on [azure-search-openai-demo](https://github.com/Azure-Samples/azure-search-openai-demo) and extend file upload feature to bring your own data into the chatbot. 
 
+![image](docs/searchUI.png)
+
 ![image](docs/upload.png)
 
- You can view uploaded files in the Azure storage account-containers-content
+You can view uploaded files in the Azure storage account-containers-content
   
 ![image](docs/storageaccount.png)
 

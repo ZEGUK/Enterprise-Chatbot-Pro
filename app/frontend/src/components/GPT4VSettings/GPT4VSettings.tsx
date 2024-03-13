@@ -34,19 +34,19 @@ export const GPT4VSettings = ({ updateGPT4VInputs, updateUseGPT4V, isUseGPT4V, g
 
     return (
         <Stack className={styles.container} tokens={{ childrenGap: 10 }}>
-            <Checkbox checked={useGPT4V} label="Use GPT-4 Turbo with Vision" onChange={onuseGPT4V} />
+            <Checkbox checked={useGPT4V} label="使用 GPT-4 + Vision" onChange={onuseGPT4V} />
             {useGPT4V && (
                 <Dropdown
                     selectedKey={vectorFieldOption}
                     className={styles.oneshotSettingsSeparator}
-                    label="GPT-4 Turbo with Vision Inputs"
+                    label="GPT-4 + Vision 的输入"
                     options={[
                         {
                             key: GPT4VInput.TextAndImages,
-                            text: "Images and text from index"
+                            text: "来自 AI Search 索引中的图像和文本"
                         },
-                        { text: "Images only", key: GPT4VInput.Images },
-                        { text: "Text only", key: GPT4VInput.Texts }
+                        { text: "仅图像", key: GPT4VInput.Images },
+                        { text: "仅文本", key: GPT4VInput.Texts }
                     ]}
                     required
                     onChange={onSetGPT4VInput}

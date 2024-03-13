@@ -13,15 +13,15 @@ interface Props {
 const vectorFields: IChoiceGroupOption[] = [
     {
         key: VectorFieldOptions.Embedding,
-        text: "Text Embeddings"
+        text: "仅文本Embedding"
     },
     {
         key: VectorFieldOptions.ImageEmbedding,
-        text: "Image Embeddings"
+        text: "仅图像Embeddings"
     },
     {
         key: VectorFieldOptions.Both,
-        text: "Text and Image embeddings"
+        text: "文本和图像Embeddings"
     }
 ];
 
@@ -55,11 +55,11 @@ export const VectorSettings = ({ updateRetrievalMode, updateVectorFields, showIm
         <Stack className={styles.container} tokens={{ childrenGap: 10 }}>
             <Dropdown
                 className={styles.oneshotSettingsSeparator}
-                label="Retrieval mode"
+                label="检索方式"
                 options={[
-                    { key: "hybrid", text: "Vectors + Text (Hybrid)", selected: retrievalMode == RetrievalMode.Hybrid, data: RetrievalMode.Hybrid },
-                    { key: "vectors", text: "Vectors", selected: retrievalMode == RetrievalMode.Vectors, data: RetrievalMode.Vectors },
-                    { key: "text", text: "Text", selected: retrievalMode == RetrievalMode.Text, data: RetrievalMode.Text }
+                    { key: "hybrid", text: "向量 + 文本 (混合)", selected: retrievalMode == RetrievalMode.Hybrid, data: RetrievalMode.Hybrid },
+                    { key: "vectors", text: "向量", selected: retrievalMode == RetrievalMode.Vectors, data: RetrievalMode.Vectors },
+                    { key: "text", text: "文本", selected: retrievalMode == RetrievalMode.Text, data: RetrievalMode.Text }
                 ]}
                 required
                 onChange={onRetrievalModeChange}
@@ -71,7 +71,7 @@ export const VectorSettings = ({ updateRetrievalMode, updateVectorFields, showIm
                     onChange={onVectorFieldsChange}
                     selectedKey={vectorFieldOption}
                     defaultSelectedKey={VectorFieldOptions.Both}
-                    label="Vector Fields (Multi-query vector search)"
+                    label="向量字段（多查询向量搜索）"
                 />
             )}
         </Stack>

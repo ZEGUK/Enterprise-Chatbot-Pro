@@ -1,5 +1,5 @@
 export enum AnalysisPanelTabs {
-    ThoughtProcessTab = "thoughtProcess",
-    SupportingContentTab = "supportingContent",
-    CitationTab = "citation"
+    ThoughtProcessTab = "思考过程",
+    SupportingContentTab = "数据来源",
+    CitationTab = "引用"
 }

@@ -32,27 +32,23 @@ export const AnalysisPanel = ({ answer, activeTab, activeCitation, citationHeigh
         >
             <PivotItem
                 itemKey={AnalysisPanelTabs.ThoughtProcessTab}
-                headerText="Thought process"
+                headerText="思考过程"
                 headerButtonProps={isDisabledThoughtProcessTab ? pivotItemDisabledStyle : undefined}
             >
                 <ThoughtProcess thoughts={answer.choices[0].context.thoughts || []} />
             </PivotItem>
             <PivotItem
                 itemKey={AnalysisPanelTabs.SupportingContentTab}
-                headerText="Supporting content"
+                headerText="数据来源"
                 headerButtonProps={isDisabledSupportingContentTab ? pivotItemDisabledStyle : undefined}
             >
                 <SupportingContent supportingContent={answer.choices[0].context.data_points} />
             </PivotItem>
-            <PivotItem
-                itemKey={AnalysisPanelTabs.CitationTab}
-                headerText="Citation"
-                headerButtonProps={isDisabledCitationTab ? pivotItemDisabledStyle : undefined}
-            >
+            <PivotItem itemKey={AnalysisPanelTabs.CitationTab} headerText="引用" headerButtonProps={isDisabledCitationTab ? pivotItemDisabledStyle : undefined}>
                 {activeCitation?.endsWith(".png") ? (
                     <img src={activeCitation} className={styles.citationImg} />
                 ) : (
-                    <iframe title="Citation" src={activeCitation} width="100%" height={citationHeight} />
+                    <iframe title="引用" src={activeCitation} width="100%" height={citationHeight} />
                 )}
             </PivotItem>
         </Pivot>

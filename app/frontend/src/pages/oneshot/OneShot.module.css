@@ -10,6 +10,9 @@
     flex-direction: column;
     align-items: center;
     width: 100%;
+    max-height: 1024px;
+    padding-top: 60px;
+    flex-grow: 1;
 }
 
 .oneshotBottomSection {
@@ -19,16 +22,17 @@
     justify-content: center;
     align-content: flex-start;
     width: 100%;
-    margin-top: 20px;
+    margin-top: 60px;
 }
 
 .oneshotTitle {
-    font-size: 4rem;
+    font-size: 3rem;
     font-weight: 600;
-    margin-top: 130px;
+    margin-top: 50px;
+    margin-bottom: 30px;
 }
 
-@media only screen and (max-width: 800px) {
+@media only screen and (max-width: 780px) {
     .oneshotTitle {
         font-size: 3rem;
         font-weight: 600;
@@ -59,8 +63,11 @@
     margin-top: 15px;
 }
 
-.settingsButton {
+.commandsContainer {
+    display: flex;
     align-self: flex-end;
+}
+.settingsButton {
     margin-right: 20px;
     margin-top: 20px;
 }

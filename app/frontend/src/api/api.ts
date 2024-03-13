@@ -1,6 +1,6 @@
 const BACKEND_URI = "";
 
-import { ChatAppResponse, ChatAppResponseOrError, ChatAppRequest, Config } from "./models";
+import { ChatAppResponse, ChatAppResponseOrError, ChatAppRequest, Config, UploadFileRequest, UploadFileResponse } from "./models";
 import { useLogin, appServicesToken } from "../authConfig";
 
 function getHeaders(idToken: string | undefined): Record<string, string> {
@@ -51,4 +51,19 @@ export async function chatApi(request: ChatAppRequest, idToken: string | undefin
 
 export function getCitationFilePath(citation: string): string {
     return `${BACKEND_URI}/content/${citation}`;
+}
+
+export async function uploadApi(request: UploadFileRequest): Promise<UploadFileResponse> {
+    const response = await fetch("/api/upload", {
+        method: "POST",
+        body: request.formData
+    });
+
+    const parsedResponse: UploadFileResponse = await response.json();
+
+    if (response.status > 299 || !response.ok) {
+        throw Error(parsedResponse.error || `上传文件失败: ${response.statusText}`);
+    }
+
+    return parsedResponse;
 }

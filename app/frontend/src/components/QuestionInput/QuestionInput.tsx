@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { useMsal } from "@azure/msal-react";
 import { Stack, TextField } from "@fluentui/react";
 import { Button, Tooltip, Field, Textarea } from "@fluentui/react-components";
-import { Send28Filled } from "@fluentui/react-icons";
+import { Send48Filled } from "@fluentui/react-icons";
 import { isLoggedIn, requireAccessControl } from "../../authConfig";
 
 import styles from "./QuestionInput.module.css";
@@ -72,7 +72,7 @@ export const QuestionInput = ({ onSend, disabled, placeholder, clearOnSend, init
             />
             <div className={styles.questionInputButtonsContainer}>
                 <Tooltip content="Ask question button" relationship="label">
-                    <Button size="large" icon={<Send28Filled primaryFill="rgba(115, 118, 225, 1)" />} disabled={sendQuestionDisabled} onClick={sendQuestion} />
+                    <Button size="large" icon={<Send48Filled primaryFill="rgba(115, 118, 225, 1)" />} disabled={sendQuestionDisabled} onClick={sendQuestion} />
                 </Tooltip>
             </div>
         </Stack>

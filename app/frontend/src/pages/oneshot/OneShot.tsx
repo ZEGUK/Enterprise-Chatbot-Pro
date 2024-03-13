@@ -2,6 +2,7 @@ import { useEffect, useRef, useState } from "react";
 import { Checkbox, Panel, DefaultButton, Spinner, TextField, SpinButton, IDropdownOption, Dropdown } from "@fluentui/react";
 
 import styles from "./OneShot.module.css";
+import customlogo from "../../assets/logo.svg";
 
 import { askApi, configApi, ChatAppResponse, ChatAppRequest, RetrievalMode, VectorFieldOptions, GPT4VInput } from "../../api";
 import { Answer, AnswerError } from "../../components/Answer";
@@ -16,7 +17,7 @@ import { GPT4VSettings } from "../../components/GPT4VSettings";
 import { useMsal } from "@azure/msal-react";
 import { TokenClaimsDisplay } from "../../components/TokenClaimsDisplay";
 
-export function Component(): JSX.Element {
+const OneShot = () => {
     const [isConfigPanelOpen, setIsConfigPanelOpen] = useState(false);
     const [promptTemplate, setPromptTemplate] = useState<string>("");
     const [promptTemplatePrefix, setPromptTemplatePrefix] = useState<string>("");
@@ -24,7 +25,7 @@ export function Component(): JSX.Element {
     const [retrievalMode, setRetrievalMode] = useState<RetrievalMode>(RetrievalMode.Hybrid);
     const [retrieveCount, setRetrieveCount] = useState<number>(3);
     const [useSemanticRanker, setUseSemanticRanker] = useState<boolean>(true);
-    const [useSemanticCaptions, setUseSemanticCaptions] = useState<boolean>(false);
+    const [useSemanticCaptions, setUseSemanticCaptions] = useState<boolean>(true);
     const [useGPT4V, setUseGPT4V] = useState<boolean>(false);
     const [gpt4vInput, setGPT4VInput] = useState<GPT4VInput>(GPT4VInput.TextAndImages);
     const [excludeCategory, setExcludeCategory] = useState<string>("");
@@ -168,21 +169,27 @@ export function Component(): JSX.Element {
 
     return (
         <div className={styles.oneshotContainer}>
-            <div className={styles.oneshotTopSection}>
+            <div className={styles.commandsContainer}>
                 <SettingsButton className={styles.settingsButton} onClick={() => setIsConfigPanelOpen(!isConfigPanelOpen)} />
-                <h1 className={styles.oneshotTitle}>Ask your data</h1>
+            </div>
+            <div className={styles.oneshotTopSection}>
+                {/* <SettingsButton className={styles.settingsButton} onClick={() => setIsConfigPanelOpen(!isConfigPanelOpen)} /> */}
+                <img
+                    src={customlogo}
+                    width="200px"
+                    height="200px"
+                    aria-hidden="true"
+                    aria-label="Chat logo"
+                    style={{ borderRadius: "50%", objectFit: "cover" }}
+                />
+                <h3 className={styles.oneshotTitle}>即刻搜索</h3>
                 <div className={styles.oneshotQuestionInput}>
-                    <QuestionInput
-                        placeholder="Example: Does my plan cover annual eye exams?"
-                        disabled={isLoading}
-                        initQuestion={question}
-                        onSend={question => makeApiRequest(question)}
-                    />
+                    <QuestionInput placeholder="请输入问题..." disabled={isLoading} initQuestion={question} onSend={question => makeApiRequest(question)} />
                 </div>
             </div>
             <div className={styles.oneshotBottomSection}>
-                {isLoading && <Spinner label="Generating answer" />}
-                {!lastQuestionRef.current && <ExampleList onExampleClicked={onExampleClicked} useGPT4V={useGPT4V} />}
+                {isLoading && <Spinner label="答案生成中" />}
+                {/* {!lastQuestionRef.current && <ExampleList onExampleClicked={onExampleClicked} useGPT4V={useGPT4V} />} */}
                 {!isLoading && answer && !error && (
                     <div className={styles.oneshotAnswerContainer}>
                         <Answer
@@ -212,41 +219,41 @@ export function Component(): JSX.Element {
             </div>
 
             <Panel
-                headerText="Configure answer generation"
+                headerText="配置答案生成"
                 isOpen={isConfigPanelOpen}
                 isBlocking={false}
                 onDismiss={() => setIsConfigPanelOpen(false)}
-                closeButtonAriaLabel="Close"
+                closeButtonAriaLabel="关闭"
                 onRenderFooterContent={() => <DefaultButton onClick={() => setIsConfigPanelOpen(false)}>Close</DefaultButton>}
                 isFooterAtBottom={true}
             >
                 <TextField
                     className={styles.oneshotSettingsSeparator}
                     defaultValue={promptTemplate}
-                    label="Override prompt template"
+                    label="重写提示模板"
                     multiline
                     autoAdjustHeight
                     onChange={onPromptTemplateChange}
                 />
                 <SpinButton
                     className={styles.oneshotSettingsSeparator}
-                    label="Retrieve this many search results:"
+                    label="检索如下数量的搜索结果："
                     min={1}
                     max={50}
                     defaultValue={retrieveCount.toString()}
                     onChange={onRetrieveCountChange}
                 />
-                <TextField className={styles.oneshotSettingsSeparator} label="Exclude category" onChange={onExcludeCategoryChanged} />
+                <TextField className={styles.oneshotSettingsSeparator} label="排除类别" onChange={onExcludeCategoryChanged} />
                 <Checkbox
                     className={styles.oneshotSettingsSeparator}
                     checked={useSemanticRanker}
-                    label="Use semantic ranker for retrieval"
+                    label="使用语义排序器进行检索"
                     onChange={onUseSemanticRankerChange}
                 />
                 <Checkbox
                     className={styles.oneshotSettingsSeparator}
                     checked={useSemanticCaptions}
-                    label="Use query-contextual summaries instead of whole documents"
+                    label="使用查询上下文摘要代替整个文档"
                     onChange={onUseSemanticCaptionsChange}
                     disabled={!useSemanticRanker}
                 />
@@ -290,6 +297,5 @@ export function Component(): JSX.Element {
             </Panel>
         </div>
     );
-}
-
-Component.displayName = "OneShot";
+};
+export default OneShot;

@@ -81,3 +81,13 @@ export type ChatAppRequest = {
 export type Config = {
     showGPT4VOptions: boolean;
 };
+
+export type UploadFileRequest = {
+    formData: FormData;
+};
+
+export type UploadFileResponse = {
+    success: boolean;
+    message?: string;
+    error?: string;
+};

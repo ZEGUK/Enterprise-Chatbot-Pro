@@ -10,6 +10,9 @@ import "./index.css";
 
 import Layout from "./pages/layout/Layout";
 import Chat from "./pages/chat/Chat";
+import OneShot from "./pages/oneshot/OneShot";
+import FileUploader from "./pages/upload/Upload";
+import NoPage from "./pages/NoPage";
 
 var layout;
 if (useLogin) {
@@ -51,11 +54,15 @@ const router = createHashRouter([
             },
             {
                 path: "qa",
-                lazy: () => import("./pages/oneshot/OneShot")
+                element: <OneShot />
+            },
+            {
+                path: "upload",
+                element: <FileUploader />
             },
             {
                 path: "*",
-                lazy: () => import("./pages/NoPage")
+                element: <NoPage />
             }
         ]
     }
